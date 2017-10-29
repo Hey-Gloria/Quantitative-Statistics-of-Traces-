@@ -42,16 +42,16 @@ This part is based on the mode defined as the following(64-ia-32-architectures-s
 A collection of functions used to generate information-dictionary from trace file, or from the original info-dict
 
 At present, the information-dictionary holds the following data fields:
-	 * `id`: the instruction id
-	 * `instr`: the instrucion type
-	 * `nOPs`: how many oprands it has
-	 * `op1`, `op2` : its oprands ("" for NULL)
-	 * `op1_mode`, `op2_mode`: the addressing mode of the oprand
-	 * `naddr`: the length of the instruciton (unit: byte)
-	 * `addr0`, `addr1`, `...`: the binary representation of the instruction
-	 * `addr`:
-	 * `taken`: 1 means "taken", 0 means "not taken"
-	 * `executed`: 1 means "executed", 0 means "not executed"
+* `id`: the instruction id
+* `instr`: the instrucion type
+* `nOPs`: how many oprands it has
+* `op1`, `op2` : its oprands ("" for NULL)
+* `op1_mode`, `op2_mode`: the addressing mode of the oprand
+* `naddr`: the length of the instruciton (unit: byte)
+* `addr0`, `addr1`, `...`: the binary representation of the instruction
+* `addr`:
+* `taken`: 1 means "taken", 0 means "not taken"
+* `executed`: 1 means "executed", 0 means "not executed"
 
 ## [toolkit.py]
 A collection of functions used to read/write files, or for data visualization
