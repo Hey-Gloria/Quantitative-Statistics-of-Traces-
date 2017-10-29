@@ -14,8 +14,7 @@ This part is based on the mode defined as the following(64-ia-32-architectures-s
 		+ Index — The value in a general-purpose register.
 		+ Scale factor — A value of 2, 4, or 8 that is multiplied by the index value.
 
-		Thus, the Offset (or Effective Address) Computation:
-		`Offset = Base + (Index * Scale) + Displacement`
+	Thus, the Offset (or Effective Address) Computation: `Offset = Base + (Index * Scale) + Displacement`
 	
 	Also, for each part of the computation formula, there are some limitations:
 	1. Base: the Base should be one of {EAX, EBX, ECX, EDX, ESP, EBP, ESI, EDI}
