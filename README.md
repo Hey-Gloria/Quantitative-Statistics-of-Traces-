@@ -40,7 +40,9 @@ This part is based on the mode defined as the following(64-ia-32-architectures-s
 
 ## [statkit.py]
 A collection of functions used to generate information-dictionary from trace file, or from the original info-dict
+
 At present, the information-dictionary holds the following data fields:
+
 	* `id`: the instruction id
 	* `instr`: the instrucion type
 	* `nOPs`: how many oprands it has
