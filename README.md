@@ -5,25 +5,39 @@ to collect the characteristics of the instructions of scripting languages runnin
 ## [addressing.py]
 A collection of functions used to determine the addressing mode of a string.
 This part is based on the mode defined as the following(64-ia-32-architectures-software-developer‘s-manual):
+ 
+1. The data for a source operand can be located in:
+	* the instruction itself (an immediate operand)
+	* a register
+	* a memory location
 
-1. The offset part of a memory address can be specified directly as:
+2. `Immediate Operands`: Some instructions use data encoded in the instruction itself as a source operand.
+
+3. `Register Operands` in 64-bit mode can be any of the following:
+	* 64-bit general-purpose registers (RAX, RBX, RCX, RDX, RSI, RDI, RSP, RBP, or R8-R15)
+	* 32-bit general-purpose registers (EAX, EBX, ECX, EDX, ESI, EDI, ESP, EBP, or R8D-R15D)
+	* 16-bit general-purpose registers (AX, BX, CX, DX, SI, DI, SP, BP, or R8W-R15W)
+	* 8-bit general-purpose registers: AL, BL, CL, DL, SIL, DIL, SPL, BPL, and R8L-R15L are available using REX prefixes; AL, BL, CL, DL, AH, BH, CH, DH are available without using REX prefixes.
+	* Segment registers (CS, DS, SS, ES, FS, and GS)
+	* RFLAGS register
+	* x87 FPU registers (ST0 through ST7, status word, control word, tag word, data operand pointer, and instruction pointer)
+	* MMX registers (MM0 through MM7)
+	* XMM registers (XMM0 through XMM15) and the MXCSR register
+	* Control registers (CR0, CR2, CR3, CR4, and CR8) and system table pointer registers (GDTR, LDTR, IDTR, and task register)
+	* Debug registers (DR0, DR1, DR2, DR3, DR6, and DR7)
+	* MSR registers
+	* RDX:RAX register pair representing a 128-bit operand
+
+4. For the `Memory Operands`, The offset part of a memory address can be specified directly as:
 	* a static value (called a displacement)
 	* or through an address computation made up of one or more of the following components:
-		+ Displacement — An 8-, 16-, or 32-bit value.
+		+ Displacement — A {None, 8-bit, 16-bit, 32-bit} value.
 		+ Base — The value in a general-purpose register.
 		+ Index — The value in a general-purpose register.
-		+ Scale factor — A value of 2, 4, or 8 that is multiplied by the index value.
+		+ Scale factor — A value of {1, 2, 4, 8} that is multiplied by the index value.
 
 	Thus, the Offset (or Effective Address) Computation: `Offset = Base + (Index * Scale) + Displacement`
-	
-	Also, for each part of the computation formula, there are some limitations:
-	1. Base: the Base should be one of {EAX, EBX, ECX, EDX, ESP, EBP, ESI, EDI}
-	2. Index: the Index should be one of {EAX, EBX, ECX, EDX, EBP, ESI, EDI}
-		* the ESP cannot be used as an index register
-	3. Scale: the Scale should be one of {1, 2, 4, 8}
-	4. Displacement: the Displacement should be one of {None, 8-bit, 16-bit, 32-bit}
-
-2. The 6 types of addressing mode defined in Intel's Manual:
+	For common combinations of address components, there are 6 addressing modes as following:
 	1. Displacement -- An absolute/static address
 		A displacement alone represents a direct (uncomputed) offset to the operand.
 	2. Base
@@ -38,6 +52,7 @@ This part is based on the mode defined as the following(64-ia-32-architectures-s
 	6. Base + (Index * Scale) + Displacement
 		* efficient indexing of a two-dimensional array when the elements of the array are 2, 4, or 8 bytes in size.
 
+	
 ## [statkit.py]
 A collection of functions used to generate information-dictionary from trace file, or from the original info-dict
 
