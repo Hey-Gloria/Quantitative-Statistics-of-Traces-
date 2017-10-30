@@ -3,7 +3,7 @@ to collect the characteristics of the instructions of scripting languages runnin
 
 
 ## [addressing.py]
-A collection of functions used to determine the addressing mode of a string.
+A collection of functions used to determine the addressing mode of a string.<br>
 This part is based on the mode defined as the following(64-ia-32-architectures-software-developer‘s-manual):
  
 1. The data for a source operand can be located in:
@@ -36,11 +36,11 @@ This part is based on the mode defined as the following(64-ia-32-architectures-s
 		+ Index — The value in a general-purpose register.
 		+ Scale factor — A value of {1, 2, 4, 8} that is multiplied by the index value.
 
-	Thus, the Offset (or Effective Address) Computation: `Offset = Base + (Index * Scale) + Displacement`<br>
+	Thus, the Offset (or Effective Address) Computation: `Offset = Base + (Index * Scale) + Displacement`.<br>
 	For common combinations of address components, there are 6 addressing modes as following:
-	1. Displacement -- An absolute/static address
+	1. Displacement -- An absolute/static address<br>
 		A displacement alone represents a direct (uncomputed) offset to the operand.
-	2. Base
+	2. Base<br>
 		A base alone represents an indirect offset to the operand.
 	3. Base + Displacement
 		* the EBP register is the best choice for the base register(automatically selects the stack segment)
