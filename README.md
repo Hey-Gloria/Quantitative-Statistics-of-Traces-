@@ -36,7 +36,7 @@ This part is based on the mode defined as the following(64-ia-32-architectures-s
 		+ Index — The value in a general-purpose register.
 		+ Scale factor — A value of {1, 2, 4, 8} that is multiplied by the index value.
 
-	Thus, the Offset (or Effective Address) Computation: `Offset = Base + (Index * Scale) + Displacement`
+	Thus, the Offset (or Effective Address) Computation: `Offset = Base + (Index * Scale) + Displacement`<br>
 	For common combinations of address components, there are 6 addressing modes as following:
 	1. Displacement -- An absolute/static address
 		A displacement alone represents a direct (uncomputed) offset to the operand.
