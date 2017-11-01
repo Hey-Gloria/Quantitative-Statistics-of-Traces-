@@ -33,7 +33,7 @@ class Statkit():
 					""" else, it's the begin for a new instruction """
 					if stat.has_key('id'):
 						stats.append(stat)
-					stat = {'lock': 0, 'rep': 0, 'op1': "", 'op2': "", 'op3': "", 'op1_mode': "", 'op2_mode': "", 'op3_mode': ""}
+					stat = {'lock': 0, 'rep': 0, 'op1': "", 'op2': "", 'op3': "", 'op1_mode': "", 'op2_mode': "", 'op3_mode': "", }
 
 					""" split the string line into 3 parts """
 					stat['id'] = line[0:16]
@@ -59,6 +59,12 @@ class Statkit():
 						stat['op3'] = instrList[3+stat['lock']+stat['rep']]
 					elif stat['nOPs'] > 3:
 						print line
+					if stat['nOPs'] >= 1:
+						stat['op1_mode'] = Addressing.checkMode(stat['op1'])
+					if stat['nOPs'] >= 2:
+						stat['op2_mode'] = Addressing.checkMode(stat['op2'])
+					if stat['nOPs'] >= 3:
+						stat['op3_mode'] = Addressing.checkMode(stat['op3'])
 
 					""" for the binary representation part"""
 					stat['nbytes'] = len(addrList)
@@ -94,9 +100,11 @@ class Statkit():
 		modeDict = {}
 		for stat in stats:
 			for i in range(0, stat['nOPs']):
-				mode = Addressing.checkMode(stat['op'+str(i+1)])
-				stat['op'+str(i+1)+'_mode'] = mode
-				modeDict[mode] += 1
+				mode = stat['op'+str(i+1)+'_mode']
+				if modeDict.has_key(mode):
+					modeDict[mode] += 1
+				else:
+					modeDict[mode] = 1
 		Toolkit.showProportion(modeDict, picName, picTitle)
 		if len(fmode) > 0:
 			Toolkit.writeJsonFile(fmode, modeDict)

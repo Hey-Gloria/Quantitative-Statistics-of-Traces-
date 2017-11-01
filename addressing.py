@@ -16,6 +16,8 @@ class Addressing():
 			   6		(Index * Scale) + Displacement
 			   7		Base + Index + Displacement
 			   8		Base + (Index * Scale) + Displacement
+			   9		%fs:Displacement
+			  10		%fs:Base
 		"""
 		if re.match(r'\$0x\w+$', op, re.I):
 			return 1
@@ -33,6 +35,10 @@ class Addressing():
 			return 7
 		elif re.match(r'(-?0x\w+)?\(%\w+,%\w+,\w+\)$', op, re.I):
 			return 8
+		elif re.match(r'%fs:0x\w+$', op, re.I):
+			return 9
+		elif re.match(r'%fs:\(%\w+\)$', op, re.I):
+			return 10
 		return
 	
 	@staticmethod
