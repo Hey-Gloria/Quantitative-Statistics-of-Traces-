@@ -54,7 +54,7 @@ The ADDRESSING MODE part is based on the mode defined as the following(64-ia-32-
 		* efficient indexing of a two-dimensional array when the elements of the array are 2, 4, or 8 bytes in size.
 <br>
 For the ADDRESSING LENGTH part, the minimum length is set to be 0-bit(for 0x0), and the sign-bit are always ignored.<br>
-We do this way to follow the example shown in Chapter 2 of `Computer architecture - a quantitative approach, 3rd Edition.`
+We do this way to follow the example shown in Chapter 2 of `Computer architecture - a quantitative approach, 3rd Edition`.
 	
 ## [statkit.py]
 A collection of functions used to generate information-dictionary from trace file, or from the original info-dict.
