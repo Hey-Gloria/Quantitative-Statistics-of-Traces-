@@ -42,5 +42,38 @@ class Addressing():
 		return
 	
 	@staticmethod
-	def checkAddrLen(op):
-		return
+	def checkAddrLen(op, mode):
+		if mode == 1:
+			num = op[1:]
+		elif mode == 3:
+			num = op
+		elif mode in [5, 6, 7, 8]:
+			nums = re.findall(r'(0x\w+)\(', op, re.I);
+			if len(nums) == 0:
+				num = 0x0
+			else:
+				num = nums[0]
+		else:
+			return
+		
+		"""
+			if num is a negative number, (ignore the sign bit)
+			checkAddrLen for -num instead
+		"""
+		if len(num) == 18 and int(num[0:3], 16) >= 8:
+			num = hex((int(num, 16) - 1) ^ (2**64 - 1))[:-1]
+
+		"""
+			the addrLen is in unit of "bits"
+		"""
+		addrLen = (len(num) - 3) * 4
+		head = int(num[0:3], 16)
+		if head >= 8:
+			addrLen += 4
+		elif head >= 4:
+			addrLen += 3
+		elif head >= 2:
+			addrLen += 2
+		elif head >= 1:
+			addrLen += 1
+		return addrLen
