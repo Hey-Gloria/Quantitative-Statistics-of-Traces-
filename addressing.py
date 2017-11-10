@@ -4,6 +4,13 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 class Addressing():
+#	modeLabelDict = {1: "Immediate", 2: "Register", 3: "Disp", 4: "Base", 
+#		5: "Base + Disp", 6: "(Index * Scale) + Disp", 7: "Base + Index + Disp", 
+#		8: "Base + (Index * Scale) + Disp", 9: "%fs:Disp", 10: "%fs:Base"}
+	modeLabelDict = {1: "Immediate", 2: "Register", 3: "Disp.", 4: "Base", 
+		5: "B+D", 6: "I*S+D", 7: "B+I+D", 
+		8: "B+I*S+D", 9: "%fs:Disp.", 10: "%fs:Base"}
+
 	@staticmethod
 	def checkMode(op):
 		""" 

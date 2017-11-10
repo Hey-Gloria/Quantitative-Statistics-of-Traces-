@@ -80,7 +80,9 @@ class Statkit():
 		return stats
 
 	@staticmethod
-	def statAndShowLength(stats, flength="", picName="", picTitle=""):
+	def statAndShowLength(stats, flength="", picName="", 
+			picTitle="The Length Distribution", 
+			xlabel="Frequency of Instruction Length", ylabel="Instruction Length"):
 		lenDict = {}
 		for stat in stats:
 			if not stat.has_key('nbytes'):
@@ -90,13 +92,17 @@ class Statkit():
 				lenDict[tlen] += 1
 			else:
 				lenDict[tlen] = 1
-		Toolkit.showProportion(lenDict, picName, picTitle)
 		if len(flength) > 0:
 			Toolkit.writeJsonFile(flength, lenDict)
+		Toolkit.showProportion(lenDict, picName, picTitle)
+#		Toolkit.showHistogram(lenDict, picName, picTitle, xlabel, ylabel)
 		return lenDict
 
 	@staticmethod
-	def statAndShowAddrMode(stats, fmode="", picName="", picTitle=""):
+	def statAndShowAddrMode(stats, fmode="", picName="", 
+			picTitle="The Addressing Mode Distribution", 
+			xlabel="Frequency of Addressing Mode", ylabel = "Addressing Mode", 
+			labelDict=Addressing.modeLabelDict):
 		modeDict = {}
 		for stat in stats:
 			for i in range(0, stat['nOPs']):
@@ -105,28 +111,29 @@ class Statkit():
 					modeDict[mode] += 1
 				else:
 					modeDict[mode] = 1
-		Toolkit.showProportion(modeDict, picName, picTitle)
 		if len(fmode) > 0:
 			Toolkit.writeJsonFile(fmode, modeDict)
+#		Toolkit.showProportion(modeDict, picName, picTitle)
+		Toolkit.showHistogram(modeDict, picName, picTitle, xlabel, ylabel, labelDict)
 		return modeDict
 	
 	@staticmethod
-	def statAndShowImmediateLength(stats, fimmediate="", picName="", picTitle=""):
+	def statAndShowAddrLength(stats, modes, fname="", picName="", 
+			picTitle="Address Length Distribution", 
+			xlabel = "Frequency of Address Length", ylabel = "Address Length"):
 		lenDict = {}
 		for stat in stats:
 			for i in range(0, stat['nOPs']):
 				op = 'op'+str(i+1)
 				mode = stat[op+'_mode']
-				if len(mode) <= 0:
-					mode = Addressing.checkMode(stat[op])
-					stat[op+'_mode'] = mode
-				if mode == 1:
-					length = Addressing.checkAddrLen(stat[op])
+				if mode in modes:
+					length = Addressing.checkAddrLen(stat[op], mode)
 					if lenDict.has_key(length):
 						lenDict[length] += 1
 					else:
 						lenDict[length] = 1
-		Toolkit.showProportion(lenDict, picName, picTitle)
-		if len(fimmediate) > 0:
-			Toolkit.writeJsonFile(fimmediate, lenDict)
+		if len(fname) > 0:
+			Toolkit.writeJsonFile(fname, lenDict)
+#		Toolkit.showProportion(lenDict, picName, picTitle)
+		Toolkit.showHistogram(lenDict, picName, picTitle, xlabel, ylabel)
 		return lenDict
