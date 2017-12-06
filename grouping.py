@@ -3,6 +3,12 @@ import sys, re
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+#############################################
+#
+#   PART 1: General-Purpose Instructions
+#
+#############################################
+
 # 1. Data Transfer
 data_transfer_instructions = [
     "mov",
@@ -146,10 +152,138 @@ bmi1_bmi2_instructions = [
     "tzcnt",
     ]
 
+General_Purpose_Instructions = [
+    data_transfer_instructions,
+    binary_arithmetic_instructions,
+    decimal_arithmetic_instructions,
+    logical_instructions,
+    shift_and_rotate_instructions,
+    bit_and_byte_instructions,
+    control_transfer_instructions,
+    string_instructions,
+    input_and_output_instructions,
+    enter_and_leave_instructions,
+    flag_control_instructions,
+    segment_register_instructions,
+    miscellaneous_instructions,
+    user_mode_extended_sate_save_and_restore_instructions,
+    random_number_generator_instructions,
+    bmi1_bmi2_instructions,
+    ]
+
+
+#############################################
+#
+#   PART 2: X87 FPU Instructions
+# 
+#           X87 FPU AND SIMD STATE MANAGEMENT INSTRUCTIONS
+#
+#############################################
+
+# 1. x87 FPU Data Transfer Instructions
+x87_data_transfer = [
+    "fld", "fst", "fstp", 
+    "fild", "fist", "fistp",
+    "fbld", "fbstp",
+    "fxch", 
+    "fcmove", "fcmovne", "fcmovb", "fcmovbe", "fcmovnb", "fcmovenbe", "fcmovu", "fcmovnu",
+    ]
+
+# 2. x87 FPU Basic Arithmetic Instructions
+x87_arithmetic = [
+    "fadd", "faddp", "fiadd", 
+    "fsub", "fsubp", "fisub", "fsubr", "fsubrp", "fisubr",
+    "fmul", "fmulp", "fimul",
+    "fdiv", "fdivp", "fidiv", "fdivr", "fdivrp", "fidivr",
+    "fprem", "fprem1",
+    "fabs", "fchs", "frndint", "fscale", "fsqrt", "fxtract",
+    ]
+
+# 3. x87 FPU Comparison Instructions
+x87_comparison = [
+    "fcom", "fcomp", "fcompp", 
+    "fucom", "fucomp", "fucompp",
+    "ficom", "ficomp", 
+    "fcomi", "fucomi", "fcomip", "fucomip",
+    "ftst", "fxam",
+    ]
+
+# 4. x87 FPU Transcendental Instructions
+x87_transcendental = [
+    "fsin", "fcos", "fsincos", 
+    "fptan", "fpatan",
+    "f2xm1", "fyl2x", "fyl2xp1",
+    ]
+
+# 5. x87 FPU Load Constants Instructions
+x87_load_constants = [
+    "fld1", "fldz", 
+    "fldpi", 
+    "fldl2e", "fldln2", "fldl2t", "fldlg2",
+    ]
+
+# 6. x87 FPU Control Instructions
+x87_control = [
+    "fincstp", "fdecstp", 
+    "ffree", 
+    "finit", "fninit", "fclex", "fnclex", 
+    "fstcw", "fnstcw", "fldcw",
+    "fstenv", "fnstenv", "fldenv", 
+    "fsave", "fnsave",
+    "frstor", "fstsw", "fnstsw",
+    "wait", "fwait", "fnop",
+    ]
+
+# 7. X87 FPU AND SIMD STATE MANAGEMENT INSTRUCTIONS
+x87_FPU_SIMD_state_management = [
+    "fxsave", "fxrstor",
+    ]
+
+X87_FPU_Instructions = [
+    x87_data_transfer, 
+    x87_arithmetic,
+    x87_comparison,
+    x87_transcendental,
+    x87_load_constants,
+    x87_control,
+    x87_FPU_SIMD_state_management,
+    ]
 
 
 
 
 
 
+allSet = [
+    General_Purpose_Instructions,
+    X87_FPU_Instructions,
+]
 
+
+f_map_name = "/Users/Gloria/Desktop/instruction_map.c"
+name_dict = []
+
+
+with open(f_map_name) as f:
+    for line in f:
+        names = re.findall(r'\"(\w*)\"', line)
+        for name in names:
+
+            setSkip = False
+            for oneSet in allSet:
+                skip = False
+                for oneList in oneSet:
+                    if name in oneList:
+                        skip = True
+                        break
+                if skip:
+                    setSkip = True
+                    break
+            if setSkip: continue
+
+            name_dict.append(name)
+    f.close()
+
+name_dict.sort()
+for name in name_dict:
+    print name
