@@ -250,13 +250,365 @@ X87_FPU_Instructions = [
     ]
 
 
+#############################################
+#
+#   PART 3: MMX Instructions
+#
+#############################################
+
+# 1. MMX Data Transfer Instructions
+mmx_data_transfer = [
+    "movd", "movq",
+    ]
+
+# 2. MMX Conversion Instructions
+mmx_conversion = [
+    "packsswb", "packssdw", "packuswb",
+    "punpckhbw", "punpckhwd", "punpckhdq",
+    "punpcklbw", "punpcklwd", "punpckldq",
+    ]
+
+# 3. MMX Packed Arithmetic Instructions
+mmx_packed_arithmetic = [
+    "paddb", "paddw", "paddd",
+    "paddsb", "paddsw", "paddusb", "paddusw",
+    "psubb", "psubw", "psubd",
+    "psubsb", "psubsw", "psubusb", "psubusw",
+    "pmulhw", "pmullw", 
+    "pmaddwd",
+    ]
+
+# 4. MMX Comparison Instructions
+mmx_comparison = [
+    "pcmpeqb", "pcmpeqw", "pcmpeqd", 
+    "pcmpgtb", "pcmpgtw", "pcmpgtd",
+    ]
+
+# 5. MMX Logical Instructions
+mmx_logical = [
+    "pand", "pandn", "por", "pxor",
+    ]
+
+# 6. MMX Shift and Rotate Instructions
+mmx_shift_and_rotate = [
+    "psllw", "pslld", "psllq",
+    "psrlw", "psrld", "psrlq",
+    "psraw", "psrad",
+    ]
+
+# 7. MMX State Management Instructions
+mmx_state_management = [
+    "emms",
+    ]
+
+MMX_Instructions = [
+    mmx_data_transfer,
+    mmx_conversion,
+    mmx_packed_arithmetic,
+    mmx_comparison,
+    mmx_logical,
+    mmx_shift_and_rotate,
+    mmx_state_management,
+    ]
 
 
+#############################################
+#
+#   PART 4: SSE INSTRUCTIONS
+#
+#############################################
+
+# SSE SIMD Single-Precision Floating-Point Instructions
+# 1. SSE Data Transfer Instructions
+sse_data_transfer = [
+    "movaps", "movups", 
+    "movhps", "movhlps", "movlps", "movlhps",
+    "movmskps", "movss",
+    ]
+
+# SSE SIMD Single-Precision Floating-Point Instructions
+# 2. SSE Packed Arithmetic Instructions
+sse_packed_arithmetic = [
+    "addps", "addss",
+    "subps", "subss",
+    "mulps", "mulss",
+    "divps", "divss",
+    "rcpps", "rcpss",
+    "sqrtps", "sqrtss", "rsqrtps", "rsqrtss",
+    "maxps", "maxss", "minps", "minss",
+    ]
+
+# SSE SIMD Single-Precision Floating-Point Instructions
+# 3. SSE Comparison Instructions
+sse_comparison = [
+    "cmpps", "cmpss",
+    "comiss", "ucomiss",
+    ]
+
+# SSE SIMD Single-Precision Floating-Point Instructions
+# 4. SSE Logical Instructions
+sse_logical = [
+    "andps", "andnps", "orps", "xorps",
+    ]
+
+# SSE SIMD Single-Precision Floating-Point Instructions
+# 5. SSE Shuffle and Unpack Instructions
+sse_shuffle_and_unpack = [
+    "shufps", 
+    "unpckhps", "unpcklps",
+    ]
+
+# SSE SIMD Single-Precision Floating-Point Instructions
+# 6. SSE Conversion Instructions
+sse_conversion = [
+    "cvtpi2ps", "cvtsi2ss", "cvtps2pi", "cvtss2si",
+    "cvttps2pi", "cvttss2si",
+    ]
+
+# 7. SSE MXCSR State Management Instructions
+sse_mxcsr_state_management = [
+    "ldmxcsr", "stmxcsr",
+    ]
+
+# 8. SSE 64-Bit SIMD Integer Instructions
+sse_simd_integer = [
+    "pavgb", "pavgw",
+    "pextrw", "pinsrw", 
+    "pmaxub", "pmaxsw", "pminub", "pminsw",
+    "pmovmskb", 
+    "pmulhuw", 
+    "psadbw",
+    "pshufw",
+    ]
+
+# 9. SSE Cacheability Control, Prefetch, and Instruction Ordering Instructions
+sse_cache_prefetch_ordering = [
+    "maskmovq",
+    "movntq", "movntps", 
+    "prefetchh",
+    "sfence",
+    ]
+
+
+SSE_Instrutions = [
+    sse_data_transfer,
+    sse_packed_arithmetic,
+    sse_comparison,
+    sse_logical,
+    sse_shuffle_and_unpack,
+    sse_conversion,
+    sse_mxcsr_state_management,
+    sse_simd_integer,
+    sse_cache_prefetch_ordering,
+    ]
+
+
+#############################################
+#
+#   PART 5: SSE2 INSTRUCTIONS
+#
+#############################################
+
+# SSE2 Packed and Scalar Double-Precision Floating-Point Instructions
+# 1. SSE2 Data Movement Instructions
+sse2_data_movement = [
+    "movapd", "movupd", "movhpd", "movlpd", 
+    "movmskpd", 
+    "movsd", 
+    ]
+
+# SSE2 Packed and Scalar Double-Precision Floating-Point Instructions
+# 2. SSE2 Packed Arithmetic Instructions
+sse2_packed_arithmetic = [
+    "addpd", "addsd", 
+    "subpd", "subsd",
+    "mulpd", "mulsd",
+    "divpd", "divsd",
+    "sqrtpd", "sqrtsd",
+    "maxpd", "maxsd", "minpd", "minsd",
+    ]
+
+# SSE2 Packed and Scalar Double-Precision Floating-Point Instructions
+# 3. SSE2 Logical Instructions
+sse2_logical = [
+    "andpd", "andnpd", 
+    "orpd", "xorpd",
+    ]
+
+# SSE2 Packed and Scalar Double-Precision Floating-Point Instructions
+# 4. SSE2 Compare Instructions
+sse2_compare = [
+    "cmppd", "cmpsd",
+    "comisd", "ucomisd",
+    ]
+
+# SSE2 Packed and Scalar Double-Precision Floating-Point Instructions
+# 5. SSE2 Shuffle and Unpack Instructions
+sse2_shuffle_and_unpack = [
+    "shufpd", 
+    "unpckhpd", "unpcklpd",
+    ]
+
+# SSE2 Packed and Scalar Double-Precision Floating-Point Instructions
+# 6. SSE2 Conversion Instructions
+sse2_conversion = [
+    "cvtpd2pi", "cvttpd2pi", "cvtpi2pd", 
+    "cvtpd2dq", "cvttpd2dq", "cvtdq2pd",
+    "cvtps2pd", "cvtpd2ps",
+    "cvtss2sd", "cvtsd2ss", 
+    "cvtsd2si", "cvttsd2si", "cvtsi2sd",
+    ]
+
+# 7. SSE2 Packed Single-Precision Floating-Point Instructions
+sse2_packed_sp_fp = [
+    "cvtdq2ps", "cvtps2dq", "cvttps2dq",
+    ]
+
+# 8. SSE2 128-Bit SIMD Integer Instructions
+sse2_simd_integer = [
+    "movdqa", "movdqu", 
+    "movq2dq", "movdq2q",
+    "pmuludq",
+    "paddq", "psubq", 
+    "pshuflw", "pshufhw", 
+    "pshufd",
+    "pslldq", "psrldq",
+    "punpckhqdq", "punpcklqdq",
+    ]
+
+# 9. SSE2 Cacheability Control and Ordering Instructions
+sse2_cache_ordering = [
+    "clflush",
+    "lfence", "mfence",
+    "pause", 
+    "maskmovdqu",
+    "movntpd", "movntdq", "movnti",
+    ]
+
+SSE2_Instructions = [
+    sse2_data_movement,
+    sse2_packed_arithmetic,
+    sse2_logical,
+    sse2_compare,
+    sse2_shuffle_and_unpack,
+    sse2_conversion,
+    sse2_packed_sp_fp,
+    sse2_simd_integer,
+    sse2_cache_ordering,
+    ]
+
+
+#############################################
+#
+#   PART 6: SSE3 INSTRUCTIONS
+#
+#############################################
+
+# 1. SSE3 x87-FP Integer Conversion Instruction
+sse3_conversion = [
+    "fisttp",
+    ]
+
+# 2. SSE3 Specialized 128-bit Unaligned Data Load Instruction
+sse3_unaligned_data_load = [
+    "lddqu",
+    ]
+
+# 3. SSE3 SIMD Floating-Point Packed ADD/SUB Instructions
+sse3_packed_add_and_sub = [
+    "addsubps", "addsubpd",
+    ]
+
+# 4. SSE3 SIMD Floating-Point Horizontal ADD/SUB Instructions
+sse3_horizontal_add_and_sub = [
+    "haddps", "hsubps", "haddpd", "hsubpd",
+    ]
+
+# 5. SSE3 SIMD Floating-Point LOAD/MOVE/DUPLICATE Instructions
+sse3_load_move_dup = [
+    "movshdup", "movsldup", "movddup",
+    ]
+
+# 6. SSE3 Agent Synchronization Instructions
+sse3_agent_synchronization = [
+    "monitor",
+    "mwait",
+    ]
+
+SSE3_Instructions = [
+    sse3_conversion,
+    sse3_unaligned_data_load,
+    sse3_packed_add_and_sub,
+    sse3_horizontal_add_and_sub,
+    sse3_load_move_dup,
+    sse3_agent_synchronization,
+    ]
+
+
+#############################################
+#
+#   PART 7: SUPPLEMENTAL STREAMING SIMD EXTENSIONS 3 (SSSE3) INSTRUCTIONS
+#           SSSE3
+#
+#############################################
+
+# 1. Horizontal Addition/Subtraction
+ssse3_horizontal_add_and_sub = [
+    "phaddw", "phaddsw", "phaddd",
+    "phsubw", "phsubsw", "phsubd",
+    ]
+
+# 2. Packed Absolute Values
+#   Multiply and Add Packed Signed and Unsigned Bytes
+#   Packed Multiply High with Round and Scale
+#   Packed Shuffle Bytes
+#   Packed Sign
+#   Packed Align Right
+ssse3_packed = [
+    "pabsb", "pabsw", "pabsd",
+    "pmaddubsw",
+    "pmulhrsw",
+    "pshufb",
+    "psignb", "psignw", "psignd",
+    "palignr",
+    ]
+
+SSSE3_Instructions = [
+    ssse3_horizontal_add_and_sub,
+    ssse3_packed,
+    ]
+
+
+#############################################
+#
+#   PART 8: SSE4.1 INSTRUCTIONS
+#
+#############################################
+
+
+
+#############################################
+#
+#   PART 9: SSE4.2 INSTRUCTIONS
+#
+#############################################
+
+
+#############################################
+#
+#   PART 
+#
+#############################################
 
 
 allSet = [
     General_Purpose_Instructions,
     X87_FPU_Instructions,
+    MMX_Instructions,
+    SSE_Instrutions,
+    SSE2_Instructions,
+    SSE3_Instructions,
+    SSSE3_Instructions,
 ]
 
 
