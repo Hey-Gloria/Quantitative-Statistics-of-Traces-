@@ -1,5 +1,6 @@
 # -*- coding:UTF-8 -*-
 import sys, re
+from toolkit import Toolkit
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -706,7 +707,38 @@ SSE4_2_Instructions = [
 
 #############################################
 #
-#   PART 10: VIRTUAL-MACHINE EXTENSIONS
+#   PART 10: INTEL® ADVANCED VECTOR EXTENSIONS (INTEL® AVX)
+#
+#############################################
+
+# 1. Promoted 256-Bit and 128-bit Arithmetic AVX Instructions
+avx_arithmetic = [
+    "sqrtps", "sqrtpd", "rsqrtps", "rcpps",
+    "sqrtps", "sqrtpd", "rsqrtps", "rcpps",
+    "mulps", "mulpd", "divps", "divpd",
+    "cvtps2pd", "cvtpd2ps",
+    "cvtdq2ps", "cvtps2dq",
+    "cvttps2dq", "cvttpd2dq",
+    "cvtpd2dq", "cvtdq2pd",
+    "minps", "minpd", "maxps", "maxpd",
+    "haddpd", "haddps", "hsubpd", "hsubps",
+    "cmpps", "cmppd",
+    "addsubpd", "addsubps", "dpps",
+    "roundpd", "roundps",
+    ]
+
+# 2. Promoted 256-bit and 128-bit Data Movement AVX Instructions
+avx_data_movement = [
+    ]
+
+AVX_Instructions = [
+    avx_arithmetic,
+    ]
+
+
+#############################################
+#
+#   PART 11: VIRTUAL-MACHINE EXTENSIONS
 #
 #############################################
 
@@ -744,7 +776,7 @@ Virtual_Machine_Extensions_Instructions = [
 
 #############################################
 #
-#   PART 11: Other Extensions
+#   PART 12: Other Extensions
 #
 #############################################
 
@@ -848,44 +880,66 @@ allSet = [
     SSSE3_Instructions,
     SSE4_1_Instructions,
     SSE4_2_Instructions,
+    AVX_Instructions,
     Virtual_Machine_Extensions_Instructions,
     Other_Extension_Instructions,
 ]
 
 # 5.13 AVX     Table 14-2,3,4,5,6,7
-# 5.15 FMA     Table 14-15,
+# 5.15 FMA     Table 14-15
 # 5.16 AVX2    Table 14-18,19
 # 5.21 SAFER MODE EXTENSIONS
 # 5.23 INTEL® SECURITY GUARD EXTENSIONS
 
 
 
+# Generate capstone instructions set
+def genCapstoneSet(f_map, f_capstone):
+    name_list = []
+    with open(f_map) as f:
+        for line in f:
+            names = re.findall(r'\"(\w*)\"', line)
+            for name in names:
+                name_list.append(name)
+        f.close()
+
+    name_list.sort()
+    Toolkit.writeJsonFile(f_capstone, name_list)
+    #for name in name_list:
+    #    print name
+    return 
+
+def genFFTSet(f_dict, f_fft):
+    insts = Toolkit.readJsonFile(f_dict)
+    name_list = insts.keys()
+    name_list.sort()
+    Toolkit.writeJsonFile(f_fft, name_list)
+    return 
 
 
-f_map_name = "/Users/Gloria/Desktop/instruction_map.c"
-name_dict = []
+if __name__ == '__main__':
 
+    f_map = "/Users/Gloria/Desktop/instruction_map.c"
+    f_capstone = "./Data/instructions.capstone"
 
-with open(f_map_name) as f:
-    for line in f:
-        names = re.findall(r'\"(\w*)\"', line)
-        for name in names:
+    #genCapstoneSet(f_map, f_capstone)
 
-            setSkip = False
-            for oneSet in allSet:
-                skip = False
-                for oneList in oneSet:
-                    if name in oneList:
-                        skip = True
-                        break
-                if skip:
-                    setSkip = True
+    f_dict = "./Data/fft.sift.operator"
+    f_fft = "./Data/instructions.fft"
+
+    #genFFTSet(f_dict, f_fft)
+
+    capstone = Toolkit.readJsonFile(f_capstone)
+    fft = Toolkit.readJsonFile(f_fft)
+
+    insts = capstone
+
+    for inst in insts:
+        find = False
+        for oneSet in allSet:
+            for oneList in oneSet:
+                if inst in oneList:
+                    find = True
                     break
-            if setSkip: continue
-
-            name_dict.append(name)
-    f.close()
-
-name_dict.sort()
-for name in name_dict:
-    print name
+            if find:    break
+        if not find:    print inst
