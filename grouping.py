@@ -585,6 +585,100 @@ SSSE3_Instructions = [
 #
 #############################################
 
+# 1.Dword Multiply Instructions
+sse4_1_dword_multiply = [
+    "pmulld",
+    "pmuldq",
+    ]
+
+# 2.Floating-Point Dot Product Instructions
+sse4_1_fp_dot_product = [
+    "dppd", "dpps",
+    ]
+
+# 3.Streaming Load Hint Instruction
+sse4_1_streaming_load_hint = [
+    "movntdqa",
+    ]
+
+# 4.Packed Blending Instructions
+sse4_1_packed_blending = [
+    "blendpd", "blendps",
+    "blendvpd", "blendvps",
+    "pblendvb", "pblendw",
+    ]
+
+# 5.Packed Integer MIN/MAX Instructions
+sse4_1_packed_integer_min_max = [
+    "pminuw", "pminud", 
+    "pminsb", "pminsd",
+    "pmaxuw", "pmaxud",
+    "pmaxsb", "pmaxsd",
+    ]
+
+# 6.Floating-Point Round Instructions with Selectable Rounding Mode
+sse4_1_fp_round = [
+    "roundps", "roundpd",
+    "roundss", "roundsd",
+    ]
+
+# 7.Insertion and Extractions from XMM Registers
+sse4_1_insertion_extraction_xmm = [
+    "extractps", "insertps",
+    "pinsrb", "pinsrd", "pinsrq",
+    "pextrb", "pextrw", "pextrd", "pextrq",
+    ]
+
+# 8.Packed Integer Format Conversions
+sse4_1_packed_integer_format_conversions = [
+    "pmovsxbw", "pmovzxbw",
+    "pmovsxbd", "pmovzxbd",
+    "pmovsxwd", "pmovzxwd",
+    "pmovsxbq", "pmovzxbq",
+    "pmovsxwq", "pmovzxwq",
+    "pmovsxdq", "pmovzxdq",
+    ]
+
+# 9.Improved Sums of Absolute Differences (SAD) for 4-Byte Blocks
+sse4_1_sum_absolute_differences = [
+    "mpsadbw",
+    ]
+
+# 10.Horizontal Search
+sse4_1_horizontal_search = [
+    "phminposuw",
+    ]
+
+# 11.Packed Test
+sse4_1_packed_test = [
+    "ptest",
+    ]
+
+# 12.Packed Qword Equality Comparisons
+sse4_1_packed_qword_equality_comparisons = [
+    "pcmpeqq",
+    ]
+
+# 13.Dword Packing With Unsigned Saturation
+sse4_1_dword_packing_unsigned_saturation = [
+    "packusdw",
+    ]
+
+SSE4_1_Instructions = [
+    sse4_1_dword_multiply,
+    sse4_1_fp_dot_product,
+    sse4_1_streaming_load_hint,
+    sse4_1_packed_blending,
+    sse4_1_packed_integer_min_max,
+    sse4_1_fp_round,
+    sse4_1_insertion_extraction_xmm,
+    sse4_1_packed_integer_format_conversions,
+    sse4_1_sum_absolute_differences,
+    sse4_1_horizontal_search,
+    sse4_1_packed_test,
+    sse4_1_packed_qword_equality_comparisons,
+    sse4_1_dword_packing_unsigned_saturation,
+    ]
 
 
 #############################################
@@ -593,13 +687,156 @@ SSSE3_Instructions = [
 #
 #############################################
 
+# 1.String and Text Processing Instructions
+sse4_2_string_text_processing = [
+    "pcmpestri", "pcmpestrm",
+    "pcmpistri", "pcmpistrm",
+    ]
+
+# 2.Packed Comparison SIMD integer Instruction
+sse4_2_packed_comparison_SIMD_integer = [
+    "pcmpgtq",
+    ]
+
+SSE4_2_Instructions = [
+    sse4_2_string_text_processing,
+    sse4_2_packed_comparison_SIMD_integer,
+    ]
+
 
 #############################################
 #
-#   PART 
+#   PART 10: VIRTUAL-MACHINE EXTENSIONS
 #
 #############################################
 
+# 1. VMCS-maintenance instructions
+vmcs_maintenance = [
+    "vmptrld", "vmptrst", 
+    "vmclear", "vmread", "vmwrite",
+    ]
+
+# 2. VMX management
+vmx_management = [
+    "vmlaunch", "vmresume",
+    "vmxoff", "vmxon",
+    ]
+
+# 3. VMX-specific TLB-management
+vmx_specific_tlb_management = [
+    "invept",  
+    "invvpid",
+    ]
+
+# 4. guest-available instructions
+vm_guest_available = [
+    "vmcall",
+    "vmfunc",
+    ]
+
+Virtual_Machine_Extensions_Instructions = [
+    vmcs_maintenance,
+    vmx_management,
+    vmx_specific_tlb_management,
+    vm_guest_available,
+    ]
+
+
+#############################################
+#
+#   PART 11: Other Extensions
+#
+#############################################
+
+# 5.12 AESNI AND PCLMULQDQ
+aesni_pclmulqdq = [
+    "aesdec", "aesdeclast",
+    "aesenc", "aesenclast",
+    "aesimc",
+    "aeskeygenassist",
+    "pclmulqdq",
+    ]
+
+# 5.14 16-BIT FLOATING-POINT CONVERSION
+fp_conversion_16bit = [
+    "vcvtph2ps", "vcvtps2ph",
+    ]
+
+# 5.17 INTEL® TRANSACTIONAL SYNCHRONIZATION EXTENSIONS (TSX)
+transactional_synchronization_extensions = [
+    "xabort",
+    "xacquire", "xrelease",
+    "xbegin", "xend", 
+    "xtest",
+    ]
+
+# 5.18 SYSTEM INSTRUCTIONS
+# mov: Load and store control registers
+# mov: Load and store debug registers
+# lock(prefix): Lock Bus
+system_instructions = [
+    "clac", "stac",
+    "lgdt", "sgdt",
+    "lldt", "sldt",
+    "ltr", "str",
+    "lidt", "sidt",
+    "mov",
+    "lmsw", "smsw",
+    "clts",
+    "arpl",
+    "lar", 
+    "lsl",
+    "verr", "verw",
+    "mov",
+    "invd", "wbinvd",
+    "invlpg", "invpcid",
+    "lock",
+    "hlt",
+    "rsm",
+    "rdmsr", "wrmsr",
+    "rdpmc",
+    "rdtsc", "rdtscp",
+    "sysenter", "sysexit",
+    "xsave", "xsavec", "xsaveopt", "xsaves",
+    "xrstor", "xrstors", 
+    "xgetbv", "xsetbv",
+    "rdfsbase", "rdgsbase",
+    "wrfsbase", "wrgsbase",
+    ]
+
+# 5.19 64-BIT MODE INSTRUCTIONS
+# movzx(64-bits): Move bytes/words to doublewords/quadwords, zero-extension
+mode_64bit = [
+    "cdqe", 
+    "cmpsq", "cmpxchg16b",
+    "lodsq", "movsq", "stosq",
+    "movzx", 
+    "swapgs",
+    "syscall", "sysret",
+    ]
+
+# 5.22 INTEL® MEMORY PROTECTION EXTENSIONS
+# bndmov: Copy or load from memory of the LowerBound and UpperBound to a register.
+# bndmov: Store to memory of the LowerBound and UpperBound from a register.
+memory_protection_extensions = [
+    "bndmk",
+    "bndcl", "bndcu", "bndcn", 
+    "bndmov",
+    "bndmov",
+    "bndldx", "bndstx",
+    ]
+
+Other_Extension_Instructions = [
+    aesni_pclmulqdq,
+    fp_conversion_16bit,
+    transactional_synchronization_extensions,
+    system_instructions,
+    mode_64bit,
+    memory_protection_extensions,
+    ]
+
+
+#############################################
 
 allSet = [
     General_Purpose_Instructions,
@@ -609,7 +846,20 @@ allSet = [
     SSE2_Instructions,
     SSE3_Instructions,
     SSSE3_Instructions,
+    SSE4_1_Instructions,
+    SSE4_2_Instructions,
+    Virtual_Machine_Extensions_Instructions,
+    Other_Extension_Instructions,
 ]
+
+# 5.13 AVX     Table 14-2,3,4,5,6,7
+# 5.15 FMA     Table 14-15,
+# 5.16 AVX2    Table 14-18,19
+# 5.21 SAFER MODE EXTENSIONS
+# 5.23 INTEL® SECURITY GUARD EXTENSIONS
+
+
+
 
 
 f_map_name = "/Users/Gloria/Desktop/instruction_map.c"
